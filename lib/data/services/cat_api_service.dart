@@ -1,5 +1,5 @@
 import 'package:chopper/chopper.dart';
-import '../config/secrets.dart'; // Asumiendo que 'theCatApiKey' está en este archivo
+import '../config/secrets.dart';
 
 part 'cat_api_service.chopper.dart';
 
