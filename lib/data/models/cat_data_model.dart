@@ -1,15 +1,11 @@
-// To parse this JSON data, do
-//
-//     final catData = catDataFromMap(jsonString);
-
 import 'package:json_annotation/json_annotation.dart';
 import 'dart:convert';
 
-part 'cat_data.g.dart';
+part 'cat_data_model.g.dart';
 
-List<CatData> catDataFromMap(String str) => List<CatData>.from(json.decode(str).map((x) => CatData.fromMap(x)));
+List<CatData> catDataFromMap(String str) => List<CatData>.from(json.decode(str).map((x) => CatData.fromJson(x)));
 
-String catDataToMap(List<CatData> data) => json.encode(List<dynamic>.from(data.map((x) => x.toMap())));
+String catDataToMap(List<CatData> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 @JsonSerializable()
 class CatData {
