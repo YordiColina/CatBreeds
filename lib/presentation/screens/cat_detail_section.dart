@@ -115,59 +115,64 @@ class CatDetailSection extends StatelessWidget {
 
          Visibility(
            visible: catData?.cfaUrl != null,
-           child: Column(
-            children: [
-              const Padding(
-                padding: EdgeInsets.only(left: 10, top: 5),
-                child: Text(
-                  "Cfa_url : ",
-                  style: TextStyle(
-                    fontFamily: 'Stars',
-                    fontSize: 14,
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(right: 20, top: 5),
-                child: SizedBox(
-                  width: 250,
+           child: GestureDetector(
+             onTap: () {
+               launchUrl(Uri.parse(catData?.cfaUrl ?? ""));
+             },
+             child: Column(
+              children: [
+                const Padding(
+                  padding: EdgeInsets.only(left: 10, top: 5),
                   child: Text(
-                    "${catData?.cfaUrl}",
-                    style: const TextStyle(
+                    "Cfa_url : ",
+                    style: TextStyle(
                       fontFamily: 'Stars',
                       fontSize: 14,
                     ),
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: null,
                   ),
                 ),
-              ),
-              const Divider(color: Colors.black54),
-            ],
+                Padding(
+                  padding: const EdgeInsets.only(right: 20, top: 5),
+                  child: SizedBox(
+                    width: 250,
+                    child: Text(
+                      "${catData?.cfaUrl}",
+                      style: const TextStyle(
+                        fontFamily: 'Stars',
+                        fontSize: 14,
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: null,
+                    ),
+                  ),
+                ),
+                const Divider(color: Colors.black54),
+              ],
+             ),
            ),
          ),
 
        Visibility(
          visible: catData?.vetstreetUrl != null,
-         child: Column(
-            children: [
-              const Padding(
-                padding: EdgeInsets.only(left: 10, top: 5),
-                child: Text(
-                  "Vetstreet url : ",
-                  style: TextStyle(
-                    fontFamily: 'Stars',
-                    fontSize: 14,
+         child: GestureDetector(
+           onTap: () {
+             launchUrl(Uri.parse(catData?.vetstreetUrl ?? ""));
+           },
+           child: Column(
+              children: [
+                const Padding(
+                  padding: EdgeInsets.only(left: 10, top: 5),
+                  child: Text(
+                    "Vetstreet url : ",
+                    style: TextStyle(
+                      fontFamily: 'Stars',
+                      fontSize: 14,
+                    ),
                   ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(right: 20, top: 5),
-                child:  GestureDetector(
-                  onTap: () {
-                    launchUrl(Uri.parse(catData?.vetstreetUrl ?? ""));
-                  },
-                  child: SizedBox(
+                Padding(
+                  padding: const EdgeInsets.only(right: 20, top: 5),
+                  child:  SizedBox(
                     width: 250,
                     child: Text(
                       "${catData?.vetstreetUrl}",
@@ -180,48 +185,53 @@ class CatDetailSection extends StatelessWidget {
                     ),
                   ),
                 ),
-              ),
-              const Divider(color: Colors.black54),
-            ],
-          ),
+                const Divider(color: Colors.black54),
+              ],
+            ),
+         ),
        ),
        Visibility(
          visible: catData?.vcahospitalsUrl != null,
-         child: Column(
-            children: [
-              const Padding(
-                padding: EdgeInsets.only(left: 10, top: 5),
-                child: Text(
-                  "Vcahospitals_url : ",
-                  style: TextStyle(
-                    fontFamily: 'Stars',
-                    fontSize: 14,
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(right: 20, top: 5),
-                child:GestureDetector(
-                  onTap: () {
-                    launchUrl(Uri.parse(catData?.vetstreetUrl ?? ""));
-                  },
-                  child: SizedBox(
-                    width: 250,
-                    child: Text(
-                      "${catData?.vcahospitalsUrl}",
-                      style: const TextStyle(
-                        fontFamily: 'Stars',
-                        fontSize: 14,
-                      ),
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: null,
+         child: GestureDetector(
+           onTap: () {
+             launchUrl(Uri.parse(catData?.vcahospitalsUrl ?? ""));
+           },
+           child: Column(
+              children: [
+                const Padding(
+                  padding: EdgeInsets.only(left: 10, top: 5),
+                  child: Text(
+                    "Vcahospitals_url : ",
+                    style: TextStyle(
+                      fontFamily: 'Stars',
+                      fontSize: 14,
                     ),
                   ),
                 ),
-              ),
-              const Divider(color: Colors.black54),
-            ],
-          ),
+                Padding(
+                  padding: const EdgeInsets.only(right: 20, top: 5),
+                  child:GestureDetector(
+                    onTap: () {
+                      launchUrl(Uri.parse(catData?.vetstreetUrl ?? ""));
+                    },
+                    child: SizedBox(
+                      width: 250,
+                      child: Text(
+                        "${catData?.vcahospitalsUrl}",
+                        style: const TextStyle(
+                          fontFamily: 'Stars',
+                          fontSize: 14,
+                        ),
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: null,
+                      ),
+                    ),
+                  ),
+                ),
+                const Divider(color: Colors.black54),
+              ],
+            ),
+         ),
        ),
         Visibility(
           visible: catData?.temperament != null,
