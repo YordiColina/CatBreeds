@@ -6,9 +6,7 @@ class CatCard extends StatelessWidget {
 
   const CatCard({super.key, this.catData});
 
-
   String getImageUrl(String? referenceImageId) {
-
     return referenceImageId != null
         ? 'https://cdn2.thecatapi.com/images/$referenceImageId.png'
         : "https://img.freepik.com/vector-gratis/personaje-dibujos-animados-gatito-ojos-dulces_1308-135596.jpg?";
@@ -16,14 +14,12 @@ class CatCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     String imageUrl = getImageUrl(catData?.referenceImageId);
-
     return Stack(
       children: [
         Center(
           child: Container(
-            height: 230,
+            height: 240,
             width: double.infinity,
             decoration: BoxDecoration(
               color: Colors.white70,
@@ -58,41 +54,61 @@ class CatCard extends StatelessWidget {
                   ],
                 ),
                 Center(
-                  child: Container(
-                    height: 150,
-                    width: 160,
+                  child: SizedBox(
+                    height: 160,
+                    width: 190,
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(20),
                       child: Image.network(
                         imageUrl,
                         width: 50,
-                        height: 50,
-                        fit: BoxFit.cover,
+                        height: 40,
+                        loadingBuilder: (BuildContext context, Widget child,
+                            ImageChunkEvent? loadingProgress) {
+                          if (loadingProgress == null) {
+                            return child;
+                          } else {
+                            return Image.asset(
+                              'assets/images/gatito.jpg',
+                              fit: BoxFit.contain,
+                            );
+                          }
+                        },
+                        fit: BoxFit.fill,
                         errorBuilder: (context, error, stackTrace) {
-                          List<String> formats = [
-                            'jpg',
-                            'png',
-                            'jpeg',
-                            'webp'
-                          ];
+                          List<String> formats = ['jpg', 'png', 'jpeg', 'webp'];
                           String? imageUrl;
 
                           for (String format in formats) {
                             imageUrl =
                                 'https://cdn2.thecatapi.com/images/${catData?.referenceImageId}.$format';
                             try {
-                              return Image.network(
-                                imageUrl,
-                                width: 50,
-                                height: 50,
-                                fit: BoxFit.cover,
+                              return ClipRRect(
+                                borderRadius: BorderRadius.circular(20),
+                                child: Image.network(
+                                  imageUrl,
+                                  loadingBuilder: (BuildContext context,
+                                      Widget child,
+                                      ImageChunkEvent? loadingProgress) {
+                                    if (loadingProgress == null) {
+                                      return child;
+                                    } else {
+                                      return Image.asset(
+                                        'assets/images/gatito.jpg',
+                                        fit: BoxFit.contain,
+                                      );
+                                    }
+                                  },
+                                  width: 50,
+                                  height: 40,
+                                  fit: BoxFit.contain,
+                                ),
                               );
                             } catch (e) {
                               continue;
                             }
                           }
-                          return const Icon(Icons
-                              .error);
+                          return const Icon(Icons.error);
                         },
                       ),
                     ),

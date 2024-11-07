@@ -1,4 +1,5 @@
 import 'package:catbreeds/presentation/bloc/cat_data_bloc.dart';
+import 'package:catbreeds/presentation/screens/cat_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -67,7 +68,15 @@ class _LandingScreenState extends State<LandingScreen> {
                    padding: const EdgeInsets.only(left: 40 , right: 40),
                    child: Column(
                      children: [
-                       CatCard(catData: state.filteredCatData?[index]),
+                       GestureDetector(
+                           onTap : () {
+                             Navigator.push(
+                               context,
+                               MaterialPageRoute(builder: (context) =>
+                               CatDetailsScreen(catData: state.filteredCatData?[index] )),
+                             );
+                           },
+                           child: CatCard(catData: state.filteredCatData?[index])),
                        const SizedBox(
                          height: 10,
                        )
