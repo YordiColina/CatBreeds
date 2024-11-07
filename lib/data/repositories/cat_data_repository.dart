@@ -1,11 +1,10 @@
 import '../models/cat_data_model.dart';
 import '../services/cat_api_service.dart';
 
-
 class CatRepository {
-  final CatApiService _catApiService;
+  final CatApiService _catApiService = CatApiService.create();
 
-  CatRepository(this._catApiService);
+  CatRepository();
 
   Future<List<CatData>> getCatBreeds() async {
     final response = await _catApiService.fetchCatBreeds();
