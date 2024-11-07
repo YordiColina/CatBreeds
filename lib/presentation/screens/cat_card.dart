@@ -34,18 +34,18 @@ class CatCard extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(left: 10, top: 5),
                       child: Text(
-                        "Raza : ${catData?.name ?? ""}",
+                        "Name : ${catData?.name ?? ""}",
                         style: const TextStyle(
                           fontFamily: 'Stars',
                           fontSize: 14,
                         ),
                       ),
                     ),
-                    const Padding(
-                      padding: EdgeInsets.only(right: 20, top: 5),
+                   Padding(
+                      padding: const EdgeInsets.only(right: 20, top: 5),
                       child: Text(
-                        "Más",
-                        style: TextStyle(
+                        "Life span ${catData?.lifeSpan ?? ""}",
+                        style: const TextStyle(
                           fontFamily: 'Stars',
                           fontSize: 14,
                         ),
@@ -120,7 +120,7 @@ class CatCard extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(left: 10, top: 5),
                       child: Text(
-                        "País de\norigen : ${catData?.origin}",
+                        "Origin : ${catData?.origin}",
                         style: const TextStyle(
                           fontFamily: 'Stars',
                           fontSize: 14,
@@ -130,7 +130,7 @@ class CatCard extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(right: 20, top: 5),
                       child: Text(
-                        "Inteligencia : ${catData?.intelligence}",
+                        "Intelligence : ${catData?.intelligence}",
                         style: const TextStyle(
                           fontFamily: 'Stars',
                           fontSize: 14,
