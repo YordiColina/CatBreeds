@@ -4,12 +4,20 @@ abstract class GetCatDataEvent extends Equatable {
   GetCatDataEvent();
 
   @override
-  List<Object> get props => []; // Equatable permite comparar objetos
+  List<Object> get props => [];
 }
 
-class getListCatData extends GetCatDataEvent {
-  getListCatData();
+class GetListCatData extends GetCatDataEvent {
+  GetListCatData();
 
   @override
   List<Object> get props => [];
+}
+
+class SearchCats extends GetCatDataEvent {
+  final String query;
+
+  SearchCats(this.query);
+  @override
+  List<Object> get props => [query];
 }

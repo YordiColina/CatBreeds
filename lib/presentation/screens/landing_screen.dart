@@ -1,4 +1,6 @@
+import 'package:catbreeds/presentation/bloc/cat_data_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'cat_card.dart';
 
@@ -10,10 +12,25 @@ class LandingScreen extends StatefulWidget {
 }
 
  TextEditingController searchController = TextEditingController();
+CatDataBloc _catDataBloc = CatDataBloc();
 
 class _LandingScreenState extends State<LandingScreen> {
   @override
+  void initState() {
+   _catDataBloc.add(GetListCatData());
+    super.initState();
+  }
+  @override
   Widget build(BuildContext context) {
+    return MultiBlocProvider(
+        providers: [
+          BlocProvider<CatDataBloc>(
+            create: ((context) => _catDataBloc),
+          ),
+        ],
+        child:  BlocBuilder<CatDataBloc, CatDataState>(
+
+          builder: (context, state) {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Column(
@@ -22,13 +39,16 @@ class _LandingScreenState extends State<LandingScreen> {
              padding:  EdgeInsets.only(top: MediaQuery.of(context).size.height *0.080,left: 20,right: 20),
              child: TextField(
                controller: searchController,
+               onChanged: (query) {
+                 _catDataBloc.add(SearchCats(query));
+               },
                decoration: InputDecoration(
-                 hintText: 'Buscar gato por nombre...',
+                 hintText: 'Buscar gato por raza...',
                  hintStyle: const TextStyle(
                    color: Colors.grey,
                    fontFamily: 'Stars'
                  ),
-                 prefixIcon: Icon(Icons.search),
+                 prefixIcon: const Icon(Icons.search),
                  border: OutlineInputBorder(
                    borderRadius: BorderRadius.circular(15),
                  ),
@@ -41,14 +61,14 @@ class _LandingScreenState extends State<LandingScreen> {
 
            Expanded(
              child: ListView.builder(
-               itemCount: 10,
+               itemCount: state.filteredCatData?.length ?? 0,
                itemBuilder: (context, index) {
-                 return const Padding(
-                   padding: EdgeInsets.only(left: 40 , right: 40),
+                 return Padding(
+                   padding: const EdgeInsets.only(left: 40 , right: 40),
                    child: Column(
                      children: [
-                       CatCard(),
-                       SizedBox(
+                       CatCard(catData: state.filteredCatData?[index]),
+                       const SizedBox(
                          height: 10,
                        )
                      ],
@@ -60,5 +80,9 @@ class _LandingScreenState extends State<LandingScreen> {
          ],
       ),
     );
+  },
+  )
+
+  );
   }
 }
