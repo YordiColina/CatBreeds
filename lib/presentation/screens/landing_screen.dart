@@ -33,7 +33,7 @@ class _LandingScreenState extends State<LandingScreen> {
 
           builder: (context, state) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.lightBlue[50],
       body: Column(
          children: [
            Padding(
@@ -44,7 +44,9 @@ class _LandingScreenState extends State<LandingScreen> {
                  _catDataBloc.add(SearchCats(query));
                },
                decoration: InputDecoration(
-                 hintText: 'Buscar gato por raza...',
+                 hintText: 'Find your cat by breed...',
+                 filled: true,
+                 fillColor: Colors.white,
                  hintStyle: const TextStyle(
                    color: Colors.grey,
                    fontFamily: 'Stars'

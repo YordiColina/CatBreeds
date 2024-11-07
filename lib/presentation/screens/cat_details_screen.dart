@@ -1,23 +1,38 @@
-import 'package:catbreeds/presentation/screens/cat_detail_section.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../data/models/cat_data_model.dart';
-import 'cat_detail_section_b.dart';
-import 'cat_detail_section_c.dart';
 
-class CatDetailsScreen extends StatelessWidget {
+
+class CatDetailsScreen extends StatefulWidget {
   final CatData? catData;
 
   const CatDetailsScreen({super.key, this.catData});
 
+  @override
+  State<CatDetailsScreen> createState() => _CatDetailsScreenState();
+}
+
+class _CatDetailsScreenState extends State<CatDetailsScreen> {
   String getImageUrl(String? referenceImageId) {
     return referenceImageId != null
         ? 'https://cdn2.thecatapi.com/images/$referenceImageId.png'
         : "https://img.freepik.com/vector-gratis/personaje-dibujos-animados-gatito-ojos-dulces_1308-135596.jpg?";
   }
+  late Map<String, dynamic> catMap ;
+  List<String> claves = [];
+  List<dynamic> values = [];
+
+   @override
+  void initState() {
+      catMap = widget.catData!.toJson();
+      claves = catMap.keys.toList();
+      values = catMap.values.toList();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    String imageUrl = getImageUrl(catData?.referenceImageId);
+    String imageUrl = getImageUrl(widget.catData?.referenceImageId);
     return Scaffold(
       appBar: PreferredSize(
           preferredSize: const Size.fromHeight(100),
@@ -45,7 +60,7 @@ class CatDetailsScreen extends StatelessWidget {
                 ),
                 Center(
                   child: Text(
-                    catData?.name ?? "",
+                    widget.catData?.name ?? "",
                     style: const TextStyle(
                       fontFamily: 'Stars',
                       fontSize: 30,
@@ -55,7 +70,7 @@ class CatDetailsScreen extends StatelessWidget {
               ],
             ),
           )),
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.lightBlue[50],
       body: Padding(
         padding: const EdgeInsets.only(left: 40, right: 40),
         child: Column(
@@ -88,7 +103,7 @@ class CatDetailsScreen extends StatelessWidget {
 
                       for (String format in formats) {
                         imageUrl =
-                            'https://cdn2.thecatapi.com/images/${catData?.referenceImageId}.$format';
+                            'https://cdn2.thecatapi.com/images/${widget.catData?.referenceImageId}.$format';
                         try {
                           return ClipRRect(
                             borderRadius: BorderRadius.circular(20),
@@ -129,15 +144,96 @@ class CatDetailsScreen extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
                 border: Border.all(color: Colors.black),
+                color: Colors.white
               ),
-              child: SingleChildScrollView(
-                child: Column(children: [
-                  CatDetailSection(catData: catData),
-                  CatDetailSectionB(catData: catData),
-                  CatDetailSectionC(catData: catData)
-                ]),
+              child: ListView.builder(
+                       itemCount: catMap.length,
+                       itemBuilder: (context, index) {
+                         return values[index].toString().length > 20 ? columnCatData(claves[index],values[index])
+                             : rowCatData(claves[index] ?? "", values[index] ?? "");
+                       }
+    ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget rowCatData(String title , dynamic value) {
+   title = title.replaceAll('_', " ");
+    return  Visibility(
+      visible: value != "" ,
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+               Padding(
+                padding: EdgeInsets.only(left: 10, top: 5),
+                child: Text(
+                  "$title : ",
+                  style: const TextStyle(
+                    fontFamily: 'Stars',
+                    fontSize: 14,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(right: 20, top: 5),
+                child: Text( title == "weight" ? "Imperial: ${widget.catData?.weight.imperial}"
+                    "\nMetric ${widget.catData?.weight.metric}"
+                    : value.toString(),
+                  style: const TextStyle(
+                    fontFamily: 'Stars',
+                    fontSize: 14,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const Divider(color: Colors.black54),
+        ],
+      ),
+    );
+  }
+
+  Widget columnCatData (String title , dynamic value) {
+    title = title.replaceAll('_', " ");
+   return Visibility(
+      visible: value != null,
+      child: GestureDetector(
+        onTap: () {
+          launchUrl(Uri.parse(value ?? ""));
+        },
+        child: Column(
+          children: [
+          Padding(
+              padding: EdgeInsets.only(left: 10, top: 5),
+              child: Text(
+                "$title : ",
+                style: const TextStyle(
+                  fontFamily: 'Stars',
+                  fontSize: 14,
+                ),
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.only(right: 5, top: 5),
+              child: SizedBox(
+                width: 250,
+                child: Text(
+                  "${value}",
+                  style: const TextStyle(
+                    fontFamily: 'Stars',
+                    fontSize: 14,
+                  ),
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: null,
+                ),
+              ),
+            ),
+            const Divider(color: Colors.black54),
           ],
         ),
       ),
