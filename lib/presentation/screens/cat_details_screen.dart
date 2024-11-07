@@ -150,7 +150,7 @@ class _CatDetailsScreenState extends State<CatDetailsScreen> {
                        itemCount: catMap.length,
                        itemBuilder: (context, index) {
                          return values[index].toString().length > 20 ? columnCatData(claves[index],values[index])
-                             : rowCatData(claves[index] ?? "", values[index] ?? "");
+                             : rowCatData(claves[index], values[index] ?? "");
                        }
     ),
             ),
@@ -170,7 +170,7 @@ class _CatDetailsScreenState extends State<CatDetailsScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
                Padding(
-                padding: EdgeInsets.only(left: 10, top: 5),
+                padding: const EdgeInsets.only(left: 10, top: 5),
                 child: Text(
                   "$title : ",
                   style: const TextStyle(
@@ -209,7 +209,7 @@ class _CatDetailsScreenState extends State<CatDetailsScreen> {
         child: Column(
           children: [
           Padding(
-              padding: EdgeInsets.only(left: 10, top: 5),
+              padding: const EdgeInsets.only(left: 10, top: 5),
               child: Text(
                 "$title : ",
                 style: const TextStyle(
@@ -223,7 +223,7 @@ class _CatDetailsScreenState extends State<CatDetailsScreen> {
               child: SizedBox(
                 width: 250,
                 child: Text(
-                  "${value}",
+                  value.toString(),
                   style: const TextStyle(
                     fontFamily: 'Stars',
                     fontSize: 14,
