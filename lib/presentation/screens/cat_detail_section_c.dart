@@ -129,7 +129,7 @@ class CatDetailSectionC extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(right: 20, top: 5),
+                  padding: const EdgeInsets.only(right: 5, top: 5),
                   child: Text(
                     "${catData?.wikipediaUrl}",
                     style: const TextStyle(

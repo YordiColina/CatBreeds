@@ -132,7 +132,7 @@ class CatDetailSection extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(right: 20, top: 5),
+                  padding: const EdgeInsets.only(right: 5, top: 5),
                   child: SizedBox(
                     width: 250,
                     child: Text(
@@ -171,7 +171,7 @@ class CatDetailSection extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(right: 20, top: 5),
+                  padding: const EdgeInsets.only(right: 5, top: 5),
                   child:  SizedBox(
                     width: 250,
                     child: Text(
@@ -209,7 +209,7 @@ class CatDetailSection extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(right: 20, top: 5),
+                  padding: const EdgeInsets.only(right: 5, top: 5),
                   child:GestureDetector(
                     onTap: () {
                       launchUrl(Uri.parse(catData?.vetstreetUrl ?? ""));
@@ -248,7 +248,7 @@ class CatDetailSection extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(right: 20, top: 5),
+                padding: const EdgeInsets.only(right: 5, top: 5),
                 child: SizedBox(
                   width: 250,
                   child: Text(
